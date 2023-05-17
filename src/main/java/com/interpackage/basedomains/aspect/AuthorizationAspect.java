@@ -11,8 +11,7 @@ import org.springframework.stereotype.Component;
 
 import java.util.Arrays;
 import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.List;
 
 @Aspect
 @Component
@@ -24,12 +23,9 @@ public class AuthorizationAspect {
     @Around("@annotation(requiredRole)")
     public Object checkPermissions(ProceedingJoinPoint joinPoint, RequiredRole requiredRole) throws Throwable {
         String rolesHeader = request.getHeader("roles");
-        Set<String> roles = new HashSet<>(Arrays.asList(rolesHeader.split(",")));
-        Set<String> requiredRoles = new HashSet<>(Arrays.asList(requiredRole.value()));
-
-        // Verificar si al menos un rol coincide
-        requiredRoles.retainAll(roles);
-        if (!requiredRoles.isEmpty()) {
+        List<String> roles = Arrays.asList(rolesHeader.split(","));
+        List<String> requiredRoles = Arrays.asList(requiredRole.value());
+        if (roles.containsAll(requiredRoles)) {
             return joinPoint.proceed();
         } else {
             return ResponseEntity.status(HttpStatus.FORBIDDEN).body(
