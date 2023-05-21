@@ -26,6 +26,8 @@ public class AuthorizationAspect {
         String rolesHeader = request.getHeader("roles");
         Set<String> roles = new HashSet<>(Arrays.asList(rolesHeader.split(",")));
         Set<String> requiredRoles = new HashSet<>(Arrays.asList(requiredRole.value()));
+        System.out.println(requiredRoles);
+        System.out.println(roles);
 
         // Verificar si al menos un rol coincide
         requiredRoles.retainAll(roles);
