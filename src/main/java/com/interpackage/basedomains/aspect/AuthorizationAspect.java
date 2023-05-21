@@ -14,9 +14,14 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Set;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 @Aspect
 @Component
 public class AuthorizationAspect {
+    
+    private static final Logger logger = LogManager.getLogger(AuthorizationAspect.class);
 
     @Autowired
     private HttpServletRequest request;
@@ -26,11 +31,13 @@ public class AuthorizationAspect {
         String rolesHeader = request.getHeader("roles");
         Set<String> roles = new HashSet<>(Arrays.asList(rolesHeader.split(",")));
         Set<String> requiredRoles = new HashSet<>(Arrays.asList(requiredRole.value()));
-        System.out.println(requiredRoles);
-        System.out.println(roles);
+        logger.info("Required roles: " + requiredRoles);
+        logger.info("User roles: " + roles);
 
         // Verificar si al menos un rol coincide
         requiredRoles.retainAll(roles);
+        logger.info("Required roles before: " + requiredRoles);
+
         if (!requiredRoles.isEmpty()) {
             return joinPoint.proceed();
         } else {
