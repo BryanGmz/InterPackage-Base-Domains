@@ -7,10 +7,11 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class User {
+public class Order {
 
-    public String name;
-    public String userName;
-    public String email;
-    public String role;
+    private String id;
+    private String status;
+    private String client;
+    private String final_address;
+    private String email;
 }

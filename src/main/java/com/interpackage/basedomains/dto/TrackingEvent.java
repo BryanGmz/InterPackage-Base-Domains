@@ -2,15 +2,15 @@ package com.interpackage.basedomains.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
+@EqualsAndHashCode(callSuper = true)
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class User {
+public class TrackingEvent extends Event {
 
-    public String name;
-    public String userName;
-    public String email;
-    public String role;
+    public Tracking tracking;
+    public User user;
 }

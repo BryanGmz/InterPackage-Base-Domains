@@ -7,10 +7,9 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class User {
+public class Route {
 
+    public String origin; // City
+    public String destination; // City
     public String name;
-    public String userName;
-    public String email;
-    public String role;
 }

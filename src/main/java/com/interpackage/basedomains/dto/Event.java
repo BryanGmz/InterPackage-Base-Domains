@@ -11,5 +11,4 @@ public class Event {
 
     public String status;
     public String message;
-
 }

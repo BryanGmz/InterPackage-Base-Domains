@@ -7,10 +7,10 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class User {
+public class Tracking {
 
-    public String name;
-    public String userName;
-    public String email;
-    public String role;
+    public String trackingNumber;
+    public String location;
+    public String status;
+    public String checkIn;
 }
